@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0be4479d-900d-4579-beaf-dededfea38b0" name="Changes" comment="complete" />
+    <list default="true" id="0be4479d-900d-4579-beaf-dededfea38b0" name="Changes" comment="must create judge function">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C-Matrix_Reducing.py" beforeDir="false" afterPath="$PROJECT_DIR$/C-Matrix_Reducing.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -273,7 +276,7 @@
       <workItem from="1661574172340" duration="3545000" />
       <workItem from="1661581116686" duration="728000" />
       <workItem from="1661672181543" duration="355000" />
-      <workItem from="1661672551089" duration="943000" />
+      <workItem from="1661672551089" duration="2984000" />
     </task>
     <task id="LOCAL-00001" summary="complete">
       <created>1661581162679</created>
@@ -282,7 +285,21 @@
       <option name="project" value="LOCAL" />
       <updated>1661581162679</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="must create judge function">
+      <created>1661673530080</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1661673530080</updated>
+    </task>
+    <task id="LOCAL-00003" summary="must create judge function">
+      <created>1661673721830</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1661673721830</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -301,7 +318,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="complete" />
-    <option name="LAST_COMMIT_MESSAGE" value="complete" />
+    <MESSAGE value="must create judge function" />
+    <option name="LAST_COMMIT_MESSAGE" value="must create judge function" />
   </component>
   <component name="VgoProject">
     <integration-enabled>false</integration-enabled>
