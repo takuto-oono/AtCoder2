@@ -15,9 +15,9 @@ def is_same_a_and_b(a_list: List[List[int]], b_list: List[List[int]], a_row: int
     row_combinations = list(itertool.combinations([i for i in range(a_row)], b_row))
     column_combinations = list(itertool.combinations([i for i in range(a_column)], b_column))
 
-    //TODO 総当りでYesが出るまで繰り返す、でなければNo
-
-
+    for row_combination in row_combinations:
+        for column_combination in column_combinations:
+            new_a_list = []
 
 
 def main():
