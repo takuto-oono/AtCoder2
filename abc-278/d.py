@@ -1,13 +1,10 @@
 def main():
-    n = int(input())
-    a_list = list(map(int, input().split()))
-    a_dic = {i: a for i, a in enumerate(a_list)}
-    init_num = 0
+    _, init_num = int(input()), 0
+    a_dic = {i: a for i, a in enumerate(list(map(int, input().split())))}
     for _ in range(int(input())):
         query = list(map(int, input().split()))
         if query[0] == 1:
-            init_num = query[1]
-            a_dic = {}
+            init_num, a_dic = query[1], {}
         if query[0] == 2:
             try:
                 a_dic[query[1] - 1] += query[2]

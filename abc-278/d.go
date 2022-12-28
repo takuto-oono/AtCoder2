@@ -79,14 +79,16 @@ func main() {
 		if num == 1 {
 			initNum = intInput()
 			aMap = map[int]int{}
-		} else if num == 2 {
+		}
+		if num == 2 {
 			i, x := intInput() - 1, intInput()
 			if _, ok := aMap[i]; ok {
 				aMap[i] += x
 			} else {
 				aMap[i] = initNum + x
 			}
-		} else {
+		}
+		if num == 3 {
 			if v, ok := aMap[intInput() - 1]; ok {
 				fmt.Println(v)
 			} else {
