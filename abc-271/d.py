@@ -38,7 +38,7 @@ class ABC271D:
                 elif tmp == b:
                     result.append('T')
             else:
-                if tmp - a >= 0 and tmp - b == 0:
+                if tmp - a >= 0 and tmp - b >= 0:
                     if self.dp_list[i - 1][tmp - a]:
                         tmp -= a
                         result.append('H')
