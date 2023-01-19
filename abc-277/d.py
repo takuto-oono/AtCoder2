@@ -21,11 +21,8 @@ class ABC277D:
                 else:
                     if self.contain_number_list[i] + 1 == self.contain_number_list[i + 1]:
                         end = i + 1
-                        result.append((begin, end))
-                        begin, end = -1, -1
-                    else:
-                        result.append((begin, end))
-                        begin, end = -1, -1
+                    
+                    result.append((begin, end))
                 continue
 
             if begin == -1:
