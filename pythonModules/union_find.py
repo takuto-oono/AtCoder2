@@ -1,3 +1,6 @@
+from typing import List
+
+
 class UnionFind:
     def __init__(self, n: int) -> None:
         self.parents = [-1 for _ in range(n)]
@@ -32,3 +35,9 @@ class UnionFind:
                 cnt += 1
         return cnt
 
+    def get_parents_list(self) -> List[int]:
+        parents_list = []
+        for i, p in enumerate(self.parents):
+            if p == -1:
+                parents_list.append(i)
+        return parents_list
