@@ -8,12 +8,13 @@ import (
 	"strings"
 )
 
+var sc = bufio.NewScanner(os.Stdin)
+
 func main() {
 
 }
 
 func inputIntSl() []int {
-	sc := bufio.NewScanner(os.Stdin)
 	sc.Scan()
 	inputs := strings.Split(sc.Text(), " ")
 	result := make([]int, len(inputs))
@@ -24,16 +25,17 @@ func inputIntSl() []int {
 }
 
 func inputStr() string {
-	sc := bufio.NewScanner(os.Stdin)
 	sc.Scan()
 	return sc.Text()
 }
 
-func inputIntSlSl() [][]int {
-	sc := bufio.NewScanner(os.Stdin)
+func inputIntSlSl(n int) [][]int {
 	results := make([][]int, 0)
 
-	for sc.Scan() {
+	for i := 0; i < n; i++ {
+		if !sc.Scan() {
+			break
+		}
 		result := make([]int, 0)
 		for _, input := range strings.Split(sc.Text(), " ") {
 			result = append(result, stringToInt(input))
@@ -44,22 +46,26 @@ func inputIntSlSl() [][]int {
 	return results
 }
 
-func inputStrSlSl() [][]string {
-	sc := bufio.NewScanner(os.Stdin)
+func inputStrSlSl(n int) [][]string {
 	results := make([][]string, 0)
 
-	for sc.Scan() {
+	for i := 0; i < n; i++ {
+		if !sc.Scan() {
+			break
+		}
 		results = append(results, strings.Split(sc.Text(), " "))
 	}
 
 	return results
 }
 
-func inputCharSlSl() [][]string {
-	sc := bufio.NewScanner(os.Stdin)
+func inputCharSlSl(n int) [][]string {
 	results := make([][]string, 0)
 
-	for sc.Scan() {
+	for i := 0; i < n; i++ {
+		if !sc.Scan() {
+			break
+		}
 		results = append(results, strings.Split(sc.Text(), ""))
 	}
 
@@ -110,6 +116,14 @@ func stringToInt(s string) int {
 
 func intToString(x int) string {
 	return strconv.Itoa(x)
+}
+
+func reverseString(s string) string {
+	runes := []rune(s)
+	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
+		runes[i], runes[j] = runes[j], runes[i]
+	}
+	return string(runes)
 }
 
 func binarySearch(sl []int, v int) int {
