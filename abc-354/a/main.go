@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"math"
 	"os"
-	"sort"
 	"strconv"
 	"strings"
 )
@@ -13,7 +12,19 @@ import (
 var sc = bufio.NewScanner(os.Stdin)
 
 func main() {
+	h := inputIntSl()[0]
+	p := 0
+	ans := 0
 
+	for {
+		if p > h {
+			break
+		}
+		p += pow(2, ans)
+		ans++
+	}
+
+	fmt.Println(ans)
 }
 
 func inputIntSl() []int {
@@ -138,13 +149,6 @@ func reverseString(s string) string {
 		runes[i], runes[j] = runes[j], runes[i]
 	}
 	return string(runes)
-}
-
-func sortStrings(sl []string) []string {
-	sortedSl := make([]string, len(sl))
-	copy(sortedSl, sl)
-	sort.Strings(sortedSl)
-	return sortedSl
 }
 
 func binarySearch(sl []int, v int) int {

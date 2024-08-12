@@ -13,7 +13,25 @@ import (
 var sc = bufio.NewScanner(os.Stdin)
 
 func main() {
+	n := inputIntSl()[0]
+	scSl := inputStrSlSl(n)
 
+	t := 0
+	for _, sc := range scSl {
+		c := stringToInt(sc[1])
+		t += c
+	}
+
+	m := mod(t, n)
+
+	sSl := make([]string, n)
+	for i, sc := range scSl {
+		sSl[i] = sc[0]
+	}
+
+	names := sortStrings(sSl)
+
+	fmt.Println(names[m])
 }
 
 func inputIntSl() []int {

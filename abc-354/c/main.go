@@ -13,7 +13,62 @@ import (
 var sc = bufio.NewScanner(os.Stdin)
 
 func main() {
+	n := inputIntSl()[0]
+	acSl := inputIntSlSl(n)
 
+	for i := 0; i < n; i++ {
+		acSl[i] = append(acSl[i], i+1)
+		acSl[i] = append(acSl[i], 1)
+	}
+
+	sort.Slice(acSl, func(i, j int) bool {
+		return acSl[i][0] < acSl[j][0]
+	})
+
+	cSl := make([]int, n)
+	for i, ac := range acSl {
+		cSl[i] = ac[1]
+	}
+
+	sort.Ints(cSl)
+
+	cMap := make(map[int]bool)
+	for i := 0; i < n; i++ {
+		cMap[cSl[i]] = true
+	}
+
+	cIdx := 0
+	for i, ac := range acSl {
+		if i == n-1 {
+			break
+		}
+
+		if ac[1] > cSl[cIdx] {
+			acSl[i][3] = 0
+			cMap[ac[1]] = false
+			continue
+		}
+
+		if ac[1] == cSl[cIdx] {
+			for {
+				cIdx++
+				if cMap[cSl[cIdx]] {
+					break
+				}
+			}
+		}
+	}
+
+	var ans []int
+	for _, ac := range acSl {
+		if ac[3] == 1 {
+			ans = append(ans, ac[2])
+		}
+	}
+
+	fmt.Println(len(ans))
+	sort.Ints(ans)
+	printIntSlice(ans)
 }
 
 func inputIntSl() []int {
