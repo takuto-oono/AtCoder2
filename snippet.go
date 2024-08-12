@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"math"
 	"os"
 	"strconv"
@@ -70,6 +71,14 @@ func inputCharSlSl(n int) [][]string {
 	}
 
 	return results
+}
+
+func printIntSlice(sl []int) {
+	strSl := make([]string, len(sl))
+	for i, num := range sl {
+		strSl[i] = strconv.Itoa(num)
+	}
+	fmt.Println(strings.Join(strSl, " "))
 }
 
 func max(a, b int) int {
