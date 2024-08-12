@@ -12,7 +12,46 @@ import (
 var sc = bufio.NewScanner(os.Stdin)
 
 func main() {
+	n := inputIntSl()[0]
+	lrSl := inputIntSlSl(n)
 
+	lSum, rSum := 0, 0
+	for _, lr := range lrSl {
+		lSum += lr[0]
+		rSum += lr[1]
+	}
+	if lSum > 0 || rSum < 0 {
+		fmt.Println("No")
+		os.Exit(0)
+	}
+
+	fmt.Println("Yes")
+
+	ans := make([]int, n)
+	sum := lSum
+	for i, lr := range lrSl {
+		ans[i] = lr[0]
+	}
+
+	for i, lr := range lrSl {
+		if sum == 0 {
+			break
+		}
+
+		if sum > 0 {
+			panic("sum > 0")
+		}
+
+		if 0-sum >= lr[1]-lr[0] {
+			ans[i] = lr[1]
+			sum += lr[1] - lr[0]
+		} else {
+			ans[i] = lr[0] - sum
+			sum = 0
+		}
+	}
+
+	printIntSlice(ans)
 }
 
 func inputIntSl() []int {
