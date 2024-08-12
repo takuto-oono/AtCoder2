@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math"
 	"os"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -81,6 +82,10 @@ func printIntSlice(sl []int) {
 	fmt.Println(strings.Join(strSl, " "))
 }
 
+func pow(x, y int) int {
+	return int(math.Pow(float64(x), float64(y)))
+}
+
 func max(a, b int) int {
 	if a > b {
 		return a
@@ -133,6 +138,13 @@ func reverseString(s string) string {
 		runes[i], runes[j] = runes[j], runes[i]
 	}
 	return string(runes)
+}
+
+func sortStrings(sl []string) []string {
+	sortedSl := make([]string, len(sl))
+	copy(sortedSl, sl)
+	sort.Strings(sortedSl)
+	return sortedSl
 }
 
 func binarySearch(sl []int, v int) int {
