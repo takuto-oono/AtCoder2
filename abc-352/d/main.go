@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"container/list"
 	"fmt"
 	"math"
 	"os"
@@ -12,8 +13,8 @@ import (
 
 var (
 	sc           = bufio.NewScanner(os.Stdin)
-	bufferSize   = 1024 * 1024 // 1MB
-	maxTokenSize = 1024 * 1024 // 1MB
+	bufferSize   = 2 * pow(10, 9)
+	maxTokenSize = 2 * pow(10, 9)
 )
 
 func init() {
@@ -21,6 +22,16 @@ func init() {
 }
 
 func main() {
+	li := inputIntSl()
+	n, k := li[0], li[1]
+	pSl := inputIntSl()
+
+	pMap := make(map[int]int, n)
+	for i, p := range pSl {
+		pMap[p] = i
+	}
+
+	sort.Ints(pSl)
 
 }
 
@@ -94,6 +105,13 @@ func pow(x, y int) int {
 	return int(math.Pow(float64(x), float64(y)))
 }
 
+func abs(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
+}
+
 func max(a, b int) int {
 	if a > b {
 		return a
@@ -155,6 +173,19 @@ func sortStrings(sl []string) []string {
 	return sortedSl
 }
 
+func equalIntSl(a, b []int) bool {
+	if len(a) != len(b) {
+		return false
+	}
+
+	for i, x := range a {
+		if x != b[i] {
+			return false
+		}
+	}
+	return true
+}
+
 func binarySearch(sl []int, v int) int {
 	l, r := 0, len(sl)-1
 
@@ -169,4 +200,40 @@ func binarySearch(sl []int, v int) int {
 		}
 	}
 	return -1
+}
+
+type Deque struct {
+	data *list.List
+}
+
+func NewDeque() *Deque {
+	return &Deque{data: list.New()}
+}
+
+func (d *Deque) PushFront(value interface{}) {
+	d.data.PushFront(value)
+}
+
+func (d *Deque) PushBack(value interface{}) {
+	d.data.PushBack(value)
+}
+
+func (d *Deque) PopFront() interface{} {
+	if d.data.Len() == 0 {
+		return nil
+	}
+	front := d.data.Front()
+	return d.data.Remove(front)
+}
+
+func (d *Deque) PopBack() interface{} {
+	if d.data.Len() == 0 {
+		return nil
+	}
+	back := d.data.Back()
+	return d.data.Remove(back)
+}
+
+func (d *Deque) Len() int {
+	return d.data.Len()
 }

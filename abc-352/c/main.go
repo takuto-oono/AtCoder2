@@ -10,18 +10,24 @@ import (
 	"strings"
 )
 
-var (
-	sc           = bufio.NewScanner(os.Stdin)
-	bufferSize   = 1024 * 1024 // 1MB
-	maxTokenSize = 1024 * 1024 // 1MB
-)
-
-func init() {
-	sc.Buffer(make([]byte, bufferSize), maxTokenSize)
-}
+var sc = bufio.NewScanner(os.Stdin)
 
 func main() {
+	n := inputIntSl()[0]
+	abSl := inputIntSlSl(n)
 
+	ans := 0
+
+	aSum := 0
+	for _, ab := range abSl {
+		aSum += ab[0]
+	}
+
+	for _, ab := range abSl {
+		ans = max(ans, aSum-ab[0]+ab[1])
+	}
+
+	fmt.Println(ans)
 }
 
 func inputIntSl() []int {

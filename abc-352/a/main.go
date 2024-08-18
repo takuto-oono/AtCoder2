@@ -10,18 +10,17 @@ import (
 	"strings"
 )
 
-var (
-	sc           = bufio.NewScanner(os.Stdin)
-	bufferSize   = 1024 * 1024 // 1MB
-	maxTokenSize = 1024 * 1024 // 1MB
-)
-
-func init() {
-	sc.Buffer(make([]byte, bufferSize), maxTokenSize)
-}
+var sc = bufio.NewScanner(os.Stdin)
 
 func main() {
+	line := inputIntSl()
+	_, x, y, z := line[0], line[1], line[2], line[3]
 
+	if min(x, y) < z && z < max(x, y) {
+		fmt.Println("Yes")
+	} else {
+		fmt.Println("No")
+	}
 }
 
 func inputIntSl() []int {

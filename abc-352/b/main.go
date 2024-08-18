@@ -21,7 +21,23 @@ func init() {
 }
 
 func main() {
+	sSl := strings.Split(inputStr(), "")
+	tSl := strings.Split(inputStr(), "")
 
+	ans := make([]int, len(sSl))
+	sIdx := 0
+
+	for i, t := range tSl {
+		if sIdx >= len(sSl) {
+			break
+		}
+		if t == sSl[sIdx] {
+			ans[sIdx] = i + 1
+			sIdx++
+		}
+	}
+
+	printIntSlice(ans)
 }
 
 func inputIntSl() []int {
