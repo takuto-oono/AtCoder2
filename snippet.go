@@ -12,24 +12,24 @@ import (
 
 var (
 	sc           = bufio.NewScanner(os.Stdin)
-	bufferSize   = 1024 * 1024 // 1MB
-	maxTokenSize = 1024 * 1024 // 1MB
+	bufferSize   = 1000000000
+	maxTokenSize = 1000000000
 )
 
 func init() {
 	sc.Buffer(make([]byte, bufferSize), maxTokenSize)
+	sc.Split(bufio.ScanWords)
 }
 
 func main() {
 
 }
 
-func inputIntSl() []int {
-	sc.Scan()
-	inputs := strings.Split(sc.Text(), " ")
-	result := make([]int, len(inputs))
-	for i, input := range inputs {
-		result[i] = stringToInt(input)
+func inputIntSl(l int) []int {
+	result := make([]int, l)
+	for i := 0; i < l; i++ {
+		sc.Scan()
+		result[i] = stringToInt(sc.Text())
 	}
 	return result
 }
@@ -39,44 +39,35 @@ func inputStr() string {
 	return sc.Text()
 }
 
-func inputIntSlSl(n int) [][]int {
-	results := make([][]int, 0)
+func inputInt() int {
+	sc.Scan()
+	return stringToInt(sc.Text())
+}
 
-	for i := 0; i < n; i++ {
-		if !sc.Scan() {
-			break
+func inputIntSlSl(y, x int) [][]int {
+	results := make([][]int, y)
+
+	for i := 0; i < y; i++ {
+		results[i] = make([]int, x)
+		for j := 0; j < x; j++ {
+			if !sc.Scan() {
+				break
+			}
+			results[i][j] = stringToInt(sc.Text())
 		}
-		result := make([]int, 0)
-		for _, input := range strings.Split(sc.Text(), " ") {
-			result = append(result, stringToInt(input))
-		}
-		results = append(results, result)
 	}
 
 	return results
 }
 
-func inputStrSlSl(n int) [][]string {
-	results := make([][]string, 0)
+func inputStrSl(n int) []string {
+	results := make([]string, n)
 
 	for i := 0; i < n; i++ {
 		if !sc.Scan() {
 			break
 		}
-		results = append(results, strings.Split(sc.Text(), " "))
-	}
-
-	return results
-}
-
-func inputCharSlSl(n int) [][]string {
-	results := make([][]string, 0)
-
-	for i := 0; i < n; i++ {
-		if !sc.Scan() {
-			break
-		}
-		results = append(results, strings.Split(sc.Text(), ""))
+		results[i] = sc.Text()
 	}
 
 	return results

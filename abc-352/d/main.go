@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"container/list"
 	"fmt"
 	"math"
 	"os"
@@ -13,34 +12,62 @@ import (
 
 var (
 	sc           = bufio.NewScanner(os.Stdin)
-	bufferSize   = 2 * pow(10, 9)
-	maxTokenSize = 2 * pow(10, 9)
+	bufferSize   = 1000000000
+	maxTokenSize = 1000000000
 )
 
 func init() {
 	sc.Buffer(make([]byte, bufferSize), maxTokenSize)
+	sc.Split(bufio.ScanWords)
 }
 
 func main() {
-	li := inputIntSl()
-	n, k := li[0], li[1]
-	pSl := inputIntSl()
+	n, k := inputInt(), inputInt()
+	pSl := inputIntSl(n)
 
-	pMap := make(map[int]int, n)
+	pIdxSl := make([]int, n)
 	for i, p := range pSl {
-		pMap[p] = i
+		pIdxSl[p-1] = i
 	}
 
-	sort.Ints(pSl)
+	var minSl []int
+	var maxSl []int
+	ans := math.MaxInt
 
+	for i, pIdx := range pIdxSl {
+		if i-k >= 0 {
+			if minSl[0] == pIdxSl[i-k] {
+				minSl = minSl[1:]
+			}
+			if maxSl[0] == pIdxSl[i-k] {
+				maxSl = maxSl[1:]
+			}
+		}
+
+		for len(minSl) > 0 && minSl[len(minSl)-1] > pIdx {
+			minSl = minSl[:len(minSl)-1]
+		}
+
+		for len(maxSl) > 0 && maxSl[len(maxSl)-1] < pIdx {
+			maxSl = maxSl[:len(maxSl)-1]
+		}
+
+		minSl = append(minSl, pIdx)
+		maxSl = append(maxSl, pIdx)
+
+		if i >= k-1 {
+			ans = min(ans, maxSl[0]-minSl[0])
+		}
+	}
+
+	fmt.Println(ans)
 }
 
-func inputIntSl() []int {
-	sc.Scan()
-	inputs := strings.Split(sc.Text(), " ")
-	result := make([]int, len(inputs))
-	for i, input := range inputs {
-		result[i] = stringToInt(input)
+func inputIntSl(l int) []int {
+	result := make([]int, l)
+	for i := 0; i < l; i++ {
+		sc.Scan()
+		result[i] = stringToInt(sc.Text())
 	}
 	return result
 }
@@ -50,44 +77,35 @@ func inputStr() string {
 	return sc.Text()
 }
 
-func inputIntSlSl(n int) [][]int {
-	results := make([][]int, 0)
+func inputInt() int {
+	sc.Scan()
+	return stringToInt(sc.Text())
+}
 
-	for i := 0; i < n; i++ {
-		if !sc.Scan() {
-			break
+func inputIntSlSl(y, x int) [][]int {
+	results := make([][]int, y)
+
+	for i := 0; i < y; i++ {
+		results[i] = make([]int, x)
+		for j := 0; j < x; j++ {
+			if !sc.Scan() {
+				break
+			}
+			results[i][j] = stringToInt(sc.Text())
 		}
-		result := make([]int, 0)
-		for _, input := range strings.Split(sc.Text(), " ") {
-			result = append(result, stringToInt(input))
-		}
-		results = append(results, result)
 	}
 
 	return results
 }
 
-func inputStrSlSl(n int) [][]string {
-	results := make([][]string, 0)
+func inputStrSl(n int) []string {
+	results := make([]string, n)
 
 	for i := 0; i < n; i++ {
 		if !sc.Scan() {
 			break
 		}
-		results = append(results, strings.Split(sc.Text(), " "))
-	}
-
-	return results
-}
-
-func inputCharSlSl(n int) [][]string {
-	results := make([][]string, 0)
-
-	for i := 0; i < n; i++ {
-		if !sc.Scan() {
-			break
-		}
-		results = append(results, strings.Split(sc.Text(), ""))
+		results[i] = sc.Text()
 	}
 
 	return results
@@ -103,13 +121,6 @@ func printIntSlice(sl []int) {
 
 func pow(x, y int) int {
 	return int(math.Pow(float64(x), float64(y)))
-}
-
-func abs(x int) int {
-	if x < 0 {
-		return -x
-	}
-	return x
 }
 
 func max(a, b int) int {
@@ -173,19 +184,6 @@ func sortStrings(sl []string) []string {
 	return sortedSl
 }
 
-func equalIntSl(a, b []int) bool {
-	if len(a) != len(b) {
-		return false
-	}
-
-	for i, x := range a {
-		if x != b[i] {
-			return false
-		}
-	}
-	return true
-}
-
 func binarySearch(sl []int, v int) int {
 	l, r := 0, len(sl)-1
 
@@ -200,40 +198,4 @@ func binarySearch(sl []int, v int) int {
 		}
 	}
 	return -1
-}
-
-type Deque struct {
-	data *list.List
-}
-
-func NewDeque() *Deque {
-	return &Deque{data: list.New()}
-}
-
-func (d *Deque) PushFront(value interface{}) {
-	d.data.PushFront(value)
-}
-
-func (d *Deque) PushBack(value interface{}) {
-	d.data.PushBack(value)
-}
-
-func (d *Deque) PopFront() interface{} {
-	if d.data.Len() == 0 {
-		return nil
-	}
-	front := d.data.Front()
-	return d.data.Remove(front)
-}
-
-func (d *Deque) PopBack() interface{} {
-	if d.data.Len() == 0 {
-		return nil
-	}
-	back := d.data.Back()
-	return d.data.Remove(back)
-}
-
-func (d *Deque) Len() int {
-	return d.data.Len()
 }
