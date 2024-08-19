@@ -12,8 +12,8 @@ import (
 
 var (
 	sc           = bufio.NewScanner(os.Stdin)
-	bufferSize   = 1024 * 1024 // 1MB
-	maxTokenSize = 1024 * 1024 // 1MB
+	bufferSize   = pow(10, 10) // 1MB
+	maxTokenSize = pow(10, 10) // 1MB
 )
 
 func init() {
@@ -35,7 +35,9 @@ func inputIntSl() []int {
 }
 
 func inputStr() string {
-	sc.Scan()
+	if !sc.Scan() {
+		panic("failed to read input")
+	}
 	return sc.Text()
 }
 
